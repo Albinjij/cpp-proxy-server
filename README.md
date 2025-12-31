@@ -12,22 +12,24 @@
 * **HTTPS Support (Extension):** Implements the `CONNECT` method to establish a TCP connection and tunnel encrypted traffic.
 * **Domain Filtering:** Implements a rule-based blacklist mechanism to block specific domains via a configuration file.
 
-## Directory Structure
-* `src/proxy.cpp`: Main source code implementing the proxy server.
-* `config/blocked_domains.txt`: Filtering rule file listing blocked domains.
-* `DESIGN.md`: High-level architecture and design documentation.
-* `Makefile`: Build instructions for the project.
-* `test_script.sh`: Automated test suite for verifying functionality.
+## Project Structure
+* **src/proxy.h**: Global header containing protocol constants, structure definitions, and function prototypes.
+* **src/main.cpp**: The server entry point; handles socket setup and thread management.
+* **src/proxy_logic.cpp**: Contains the implementation for request parsing, domain filtering, and data relaying.
+* **config/blocked_domains.txt**: Filtering rule file listing blacklisted domains.
+* **DESIGN.md**: Detailed documentation on architecture and logical layers.
+* **Makefile**: Optimized build script for multi-file compilation and linking.
+* **test_script.sh**: Automated test suite for verifying functionality.
 
 ## How to Compile
-Compile the project using the included Makefile:
+Build the project using the Makefile
 ```bash
 make
 ```
 ## How to Run
 Start the server (default listening on Port 8888):
 ```bash
-./proxy
+./proxy_server
 ```
 ## How to Test
 You can use the automated test script or manual commands to demonstrate usage
