@@ -68,3 +68,6 @@ curl -v -x localhost:8888 http://www.facebook.com
 
 ### 5. Proxy Activity Logs
 ![Proxy Logs](image_proofs/logs_output.png)
+
+### 6. Automated Test Suite Results
+![Automated Tests](image_proofs/automated_tests.png)
