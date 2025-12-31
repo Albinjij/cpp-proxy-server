@@ -16,6 +16,27 @@ The system is a multithreaded HTTP proxy server designed to handle concurrent cl
 * **Isolation:** If one client stalls, it does not block the main acceptor loop or other active clients.
 * **Standard Library:** Utilizes C++ `std::thread` for portable threading support.
 
+---
+##  Software Architecture & Logic Flow
+
+The source code is organized into four distinct logical layers:
+
+1. **Network Listener Layer:** - Uses a Master Socket to listen for incoming TCP connections.
+   - Dispatches each connection to a dedicated POSIX Thread (pthread) to ensure non-blocking performance.
+
+2. **Request Parser & Validation:**
+   - Interprets raw byte streams into HTTP structures.
+   - Distinguishes between standard GET/POST requests and HTTPS `CONNECT` tunnels.
+
+3. **Security & Filtering Engine:**
+   - Intercepts requests before forwarding.
+   - Cross-references the target host against the `blocked_domains.txt` configuration.
+   - Injects a `403 Forbidden` response if a match is found.
+
+4. **I/O Relay (The "Bridge"):**
+   - Handles the bi-directional transfer of data between the client and the remote server.
+   - Implements error handling to gracefully close sockets on timeout or disconnect.
+
 ## 3. Data Flow
 
 1. **Client Request:** Client connects to Proxy (Port 8888) and sends an HTTP GET or CONNECT request.
