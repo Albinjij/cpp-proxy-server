@@ -1,12 +1,15 @@
-CC = g++
-CFLAGS = -std=c++11 -pthread
-TARGET = proxy
-SRC = src/proxy.cpp
+CXX = g++
+CXXFLAGS = -Wall -pthread -std=c++11
+SRC = src/main.cpp src/proxy_logic.cpp
+OBJ = $(SRC:.cpp=.o)
+TARGET = proxy_server
 
-all: $(TARGET)
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJ) $(TARGET)
+
