@@ -50,3 +50,21 @@ Confirm that blacklisted domains listed in your configuration file are correctly
 curl -v -x localhost:8888 http://www.facebook.com
 ```
 **Expected Output:** `Access Denied by Proxy: This site is blocked.`
+
+---
+## Proof of Functionality
+
+### 1. Server Initialization
+![Server Running](image_proofs/server_running.png)
+
+### 2. HTTP Request Success
+![HTTP Success](image_proofs/http_request_success.png)
+
+### 3. HTTPS Tunneling (CONNECT method)
+![HTTPS Success](image_proofs/https_connect_success.png)
+
+### 4. Domain Filtering (403 Forbidden)
+![Blocked Domain](image_proofs/blocked_domain_test.png)
+
+### 5. Proxy Activity Logs
+![Proxy Logs](image_proofs/logs_output.png)
