@@ -19,7 +19,16 @@
 #define BUFFER_SIZE 8192
 #define PORT 8888
 
-// Global variable declaration (extern means it's defined in another file)
+// Structured data for HTTP requests - This is your architectural upgrade
+struct HttpRequest {
+    std::string method;
+    std::string host;
+    std::string path;
+    int port;
+    bool is_https;
+};
+
+// Global variable declaration
 extern std::set<std::string> blocked_domains;
 
 // Function Prototypes

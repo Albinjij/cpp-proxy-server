@@ -13,13 +13,13 @@
 * **Domain Filtering:** Implements a rule-based blacklist mechanism to block specific domains via a configuration file.
 
 ## Project Structure
-* **src/proxy.h**: Global header containing protocol constants, structure definitions, and function prototypes.
-* **src/main.cpp**: The server entry point; handles socket setup and thread management.
-* **src/proxy_logic.cpp**: Contains the implementation for request parsing, domain filtering, and data relaying.
-* **config/blocked_domains.txt**: Filtering rule file listing blacklisted domains.
-* **DESIGN.md**: Detailed documentation on architecture and logical layers.
-* **Makefile**: Optimized build script for multi-file compilation and linking.
-* **test_script.sh**: Automated test suite for verifying functionality.
+
+* **src/main.cpp**: Entry point; handles the master socket and thread dispatching.
+* **src/proxy.h**: Global header defining the `HttpRequest` data structure, protocol constants, and function prototypes.
+* **src/proxy_logic.cpp**: Core logic for parsing, filtering, and the I/O relay bridge.
+* **config/blocked_domains.txt**: External configuration for the domain blacklist.
+* **Makefile**: Build script for compiling the project.
+* **test_script.sh**: Automated bash script for verifying HTTP, HTTPS, and Filter features.
 
 ## How to Compile
 Build the project using the Makefile

@@ -16,18 +16,24 @@ The system is a multithreaded HTTP proxy server designed to handle concurrent cl
 * **Isolation:** If one client stalls, it does not block the main acceptor loop or other active clients.
 * **Standard Library:** Utilizes C++ `std::thread` for portable threading support.
 
-## 3.️ Software Architecture & Logic Flow
+## 3. Software Architecture & Logic Flow
 
-The system follows a **Modular Monolith** architecture. While logically unified, the source code is physically organized into a header-implementation split (`proxy.h`, `main.cpp`, and `proxy_logic.cpp`). This separation ensures high maintainability, cleaner compilation, and follows industry-standard C++ practices.
+The system follows a **Modular Monolith** architecture. While logically unified, the source code is physically organized into a header-implementation split (`proxy.h`, `main.cpp`, and `proxy_logic.cpp`).
+
+### Data Modeling Layer
+To ensure type-safety and maintainability, the proxy utilizes a custom `HttpRequest` structure defined in `proxy.h`. This separates the **Parsing Phase** from the **Execution Phase**:
+* **Method & Path:** Captured via stringstream extraction.
+* **Host & Port:** Extracted and normalized (e.g., assigning port 443 for CONNECT, 80 for GET).
+* **State:** Tracks whether a request is an encrypted tunnel or standard HTTP via the `is_https` boolean.
 
 ### Logical Layers:
 
-1. **Network Listener Layer (`main.cpp`)**: 
+1. **Network Listener Layer (`main.cpp`)**:
    - Responsible for master socket initialization, binding, and the entry-point loop.
    - Dispatches each incoming connection to a dedicated thread to ensure concurrent performance.
 
 2. **Request Parser & Validation (`proxy_logic.cpp`)**:
-   - Interprets raw byte streams into HTTP structures.
+   - Interprets raw byte streams into the `HttpRequest` structure.
    - Distinguishes between standard GET/POST requests and encrypted HTTPS `CONNECT` tunnels.
 
 3. **Security & Filtering Engine (`proxy_logic.cpp`)**:
