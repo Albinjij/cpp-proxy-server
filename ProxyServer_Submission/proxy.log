@@ -1,0 +1,13 @@
+HTTPS Proxy listening on port 8888...
+Connected to: chatgpt.com
+BLOCKED: facebook.com
+Connected to: google.com
+BLOCKED: instagram.com
+BLOCKED: tiktok.com
+Connected to: chatgpt.com
+Connected to: example.com
+Connected to: www.chatgpt.com
+Connected to: www.google.com
+BLOCKED: www.tiktok.com
+BLOCKED: www.instagram.com
+Connected to: www.example.org
