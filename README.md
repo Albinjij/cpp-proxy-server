@@ -1,4 +1,5 @@
 # C++ Multithreaded HTTP & HTTPS Proxy Server
+**Developed by Albin Jiji**
 
 ## Project Overview
 * It acts as an intermediary system that accepts client network requests.
