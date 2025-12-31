@@ -78,7 +78,10 @@ The proxy implements support for HTTPS via the HTTP `CONNECT` method.
 To enhance maintainability and scalability, future iterations will focus on:
 
 * **Modular Refactoring:** Organizing the source code into subdirectories (e.g., `/src/Logger`, `/src/Metrics`) to better separate core concerns.
-* **Advanced Concurrency:** Implementing a **Thread Pool** to manage worker threads efficiently and handle high volumes of connections without the overhead of spawning new threads for every request.
+* **Advanced Concurrency (Thread Pooling):**
+  - **Concept:** Transition from `std::thread::detach` to a fixed-size worker pool.
+  - **Benefit:** This would mitigate the overhead of thread creation/destruction for every request and prevent "thread exhaustion" under high-load scenarios.
+  - **Implementation:** Would require a synchronized `std::queue<int>` for client sockets and a `std::condition_variable` to manage worker wake-ups.
 * **Caching Engine:** Adding an **LRU (Least Recently Used) cache** to store frequent resources, reducing latency and outbound bandwidth.
 * **Request Sanitization:** Enhancing the parser to perform deeper header validation to prevent sophisticated request smuggling attacks.
 
